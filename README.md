@@ -1,5 +1,18 @@
 # Custom::CFrontDistro
 
+## TLDR;
+There's a pypi module ([https://pypi.org/project/CfnCustomCFrontDistro/](https://pypi.org/project/CfnCustomCFrontDistro/))
+
+1. make requirements.txt and add entry to it for 'CfnCustomCFrontDistro>=0.0.1'
+
+follow Examples section below to:
+2. make a custom resource, with the ARN of the lambda function which will bring it about - this custom resource is the cloudfront distro supporting origin groups.
+3. make a lambda function, and set its handler to "customCFrontDistro.lambda_handler" - this will handle CRUD and can be polled by cfn for completion, as cloudfront distros can take a while to create or [disable>delete].
+
+see info on deploying - you can do this with a single function for an account / region (it'll be happening in us-east-1 for cloudfront distros), or put out a function with solution cfn templates, as you'd like.
+
+either way, you need the custom::... resource to reference the ARN of the lambda deployed independently, or with rest of resources for solution. 
+
 ## USE
 
 Use this custom resource as if a regular AWS::CloudFront::Distribution, with additional syntax available for the configuration and use of origin groups (see below section)
